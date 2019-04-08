@@ -8,10 +8,10 @@ class Weight:
     def __init__(self, t, y, f, today):
         self.today = today
         self.t_weight = float(t)
-        self.y_weight = float(y)
-        self.f_weight = float(f)
-        self.diff_y = round(self.t_weight - self.y_weight, 1)
-        self.diff_f = round(self.t_weight - self.f_weight, 1)
+        y_weight = float(y)
+        f_weight = float(f)
+        self.diff_y = round(self.t_weight - y_weight, 1)
+        self.diff_f = round(self.t_weight - f_weight, 1)
 
     def format_weight(self):
         self.t_weight = str(self.t_weight)
