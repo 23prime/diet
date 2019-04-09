@@ -7,7 +7,7 @@ class Graph:
     def __init__(self):
         self.df = p.read_csv('weight.csv')
 
-    def plotGraph(self):
+    def plot_graph(self):
         self.df.plot(x='date')
         mp.grid(which='major', color='black', linestyle=':')
 

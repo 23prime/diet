@@ -31,7 +31,7 @@ with open('weight.csv', 'a+') as file:
     csv.writer(file).writerow([today, t_weight])
 
 # Generate graph from CSV
-sp.Graph().plotGraph()
+sp.Graph().plot_graph()
 
 # Get difference of yesterday and first day, and format
 msg = sw.Weight(t_weight, y_weight, f_weight, today).format_weight()
