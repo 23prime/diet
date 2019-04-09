@@ -1,9 +1,11 @@
-import src.plot as sp
-import src.weight as sw
-import src.tweet as st
 import argparse
 import csv
 import datetime
+import sys
+
+import src.plot as sp
+import src.weight as sw
+import src.tweet as st
 
 # Get command-line arguments
 parser = argparse.ArgumentParser()
@@ -18,6 +20,9 @@ today = str(datetime.date.today().strftime("%m-%d"))
 with open('weight.csv') as file:
     csv_file = csv.reader(file)
     csv_arr = [row for row in csv_file]
+    if csv_arr[-1][0] == today:
+        print("Error: Today's data is already exist.")
+        sys.exit(1)
     y_weight = csv_arr[-1][1]
     f_weight = csv_arr[1][1]
 
