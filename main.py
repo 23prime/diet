@@ -39,3 +39,4 @@ msg = sw.Weight(t_weight, y_weight, f_weight, today).format_weight()
 # Post to Twitter
 img = "weight.png"
 st.Tweet().tweet(msg, img)
+print("Succeeded to post!")
