@@ -1,6 +1,6 @@
 # diet
 
-Record the weight of the day and post and the changes to Twitter.
+Record the weight of the day and the changes, and post to Twitter.
 
 ## Usage
 
