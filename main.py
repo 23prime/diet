@@ -14,7 +14,7 @@ img_name = file_name + '.png'
 
 # Get command-line arguments
 parser = argparse.ArgumentParser()
-parser.add_argument("weight", help="Please set argument of your today's weight", type=float)
+parser.add_argument("weight", help="Please set argument of your today's weight.", type=float)
 args = parser.parse_args()
 t_weight = args.weight
 
@@ -36,7 +36,7 @@ msg = sw.Weight(t_weight, y_weight, f_weight, today).format_weight()
 
 # Ask to do or not
 line = "--------------------\n"
-print("{}{}\n{}Update data and post this message with \"{}.png\"? [Y/n]".format(line, msg, line, img_name))
+print("{}{}\n{}Add today's data and post this message with \"{}\"? [Y/n]".format(line, msg, line, img_name))
 ans = input().strip().lower()
 if not ans in ['', 'y','yes']:
     print("Canceled.")
@@ -50,5 +50,5 @@ with open(csv_name, 'a+') as file:
 sp.Graph().plot_graph()
 
 # Post to Twitter
-st.Tweet().tweet(msg, img)
-print("Succeeded to post!")
+st.Tweet().tweet(msg, img_name)
+print("Success!")
