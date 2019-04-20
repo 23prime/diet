@@ -6,3 +6,7 @@ test = "python3 test.py"
 pandas = "*"
 matplotlib = "*"
 python-twitter = "*"
+
+[dev-packages]
+pylint = "*"
+urllib3 = ">=1.24.2"
