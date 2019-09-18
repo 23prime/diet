@@ -1,0 +1,12 @@
+#!/bin/sh -eu
+
+ARG=$1
+
+if [ $# -ne 1 ]; then
+    echo "Please set just 1 argument!" 1>&2
+    exit 1
+else
+    cd ~/src/diet/
+    pipenv run start $ARG
+    exit 0
+fi
