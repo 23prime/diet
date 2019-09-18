@@ -10,5 +10,4 @@ class Graph:
     def plot_graph(self):
         self.df.plot(x='date')
         mp.grid(which='major', color='black', linestyle=':')
-
         m.pyplot.savefig("weight.png")
