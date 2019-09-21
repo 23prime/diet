@@ -1,11 +1,15 @@
-import pandas as p
+import pandas as pd
 import matplotlib as m
 import matplotlib.pyplot as mp
-
+from src.weights import Weights, db
 
 class Graph:
     def __init__(self):
-        self.df = p.read_csv('weight.csv')
+        table = Weights.query.all()
+        self.df = pd.DataFrame(
+            [(row.date, float(row.weight)) for row in table],
+            columns=['date', 'weight']
+        )
 
     def plot_graph(self):
         self.df.plot(x='date')

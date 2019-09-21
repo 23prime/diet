@@ -24,7 +24,7 @@ if not ans in ['', 'y','yes']:
     exit(0)
 
 # Run
-weight.update_csv()
+weight.update_db()
 sp.Graph().plot_graph()
 st.Tweet().tweet(weight_msg, img_name)
 print("Success!")
