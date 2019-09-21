@@ -1,7 +1,5 @@
 [scripts]
 main = "python3 main.py"
-weight = "python3 src/weight.py"
-web = "python3 --version"
 
 [packages]
 pandas = "*"
