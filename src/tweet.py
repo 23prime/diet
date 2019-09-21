@@ -1,16 +1,13 @@
 import twitter
-import json
+import os
 
 class Tweet:
     def __init__(self):
-        with open('mezase65kg.json') as file:
-            json_file = json.load(file)
-
         self.api = twitter.Api(
-            consumer_key = json_file['consumer_key'],
-            consumer_secret = json_file['consumer_secret'],
-            access_token_key = json_file['access_token'],
-            access_token_secret = json_file['access_token_secret']
+            consumer_key = os.environ['CONSUMER_KEY'],
+            consumer_secret = os.environ['CONSUMER_KEY_SECRET'],
+            access_token_key = os.environ['ACCESS_TOKEN'],
+            access_token_secret = os.environ['ACCESS_TOKEN_SECRET']
         )
 
     def tweet(self, msg, img):
