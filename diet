@@ -7,6 +7,6 @@ if [ $# -ne 1 ]; then
     exit 1
 else
     cd ~/src/diet/
-    pipenv run start $ARG
+    pipenv run main $ARG
     exit 0
 fi
