@@ -1,0 +1,6 @@
+version: '2.1'
+
+services:
+  sos-page:
+    image: ok-diet
+    build: .

@@ -1,4 +1,3 @@
-import argparse
 import datetime
 from src.weights import Weights, db
 
@@ -9,28 +8,17 @@ def add_sign(f):
         return "+" + str(f)
 
 class Weight:
-    def __init__(self):
+    def __init__(self, t_weight):
         self.today = str(datetime.date.today().strftime("%m-%d"))
-        self.t_weight = float()
+        self.t_weight = float(t_weight)
         self.first = Weights.query.first()
         self.last = Weights.query.all()[-1]
         self.f_weight = float(self.first.weight)
         self.y_weight = float(self.last.weight)
 
-    def today_weight(self):
-        parser = argparse.ArgumentParser()
-        parser.add_argument(
-            "weight", help="Please set argument of your today's weight.",
-            type=float)
-        args = parser.parse_args()
-        self.t_weight = float(args.weight)
-        
     def format_weight(self):
-        self.today_weight()
-
         if self.last.date == self.today:
-            print("Error: Today's data is already exist.")
-            exit(1)
+            raise Exception
 
         diff_f = round(self.t_weight - self.f_weight, 1)
         diff_y = round(self.t_weight - self.y_weight, 1)

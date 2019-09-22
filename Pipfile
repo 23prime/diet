@@ -1,5 +1,6 @@
 [scripts]
-main = "python3 main.py"
+cli = "python3 cli.py"
+web = "python3 main.py"
 
 [packages]
 pandas = "*"
@@ -8,6 +9,8 @@ python-twitter = "*"
 flask = "*"
 SQLAlchemy = "*"
 flask-sqlalchemy = "*"
+flask-wtf = "*"
+flask-bootstrap = "*"
 psycopg2 = "*"
 
 [dev-packages]

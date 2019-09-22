@@ -1,0 +1,13 @@
+.confirm-bg {
+    padding: 0vw;
+    display: block;
+    /* background-color: lightskyblue; */
+    border: solid 0.5vh #668ad8;
+    font-size: 5vh;
+}
+
+textarea {
+    width: 50vw;
+    height: 40vh;
+    font-size: 5vh;
+}

@@ -1,28 +1,43 @@
-import sys
+from flask import *
 
-import src.plot as sp
-import src.weight as sw
-import src.tweet as st
+from src.plot import Graph
+from src.weight import Weight
+from src.tweet import Tweet
+from app import app
 
-# Define file names
-img_file = 'weight.png'
+objs = []
 
-weight = sw.Weight()
-weight_msg = weight.format_weight()
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
-# Ask to do or not
-line = "--------------------\n"
-print(
-    "{}{}\n{}Add today's data and post this message with \"{}\"? [Y/n]"
-    .format(line, weight_msg, line, img_file))
-ans = input().strip().lower()
+@app.route('/confirm/', methods=['GET', 'POST'])
+def confirm():
+    if request.method == 'POST':
+        t_weight = request.form['weight']
+        weight = Weight(t_weight)
+        objs.append(weight)
+        try:
+            weight_msg = weight.format_weight()
+        except:
+            return render_template('exist.html')
+        else:
+            return render_template('confirm.html', weight_msg=weight_msg)
+    else:
+        return redirect(request.url[-1])
 
-if not ans in ['', 'y','yes']:
-    print("Canceled.")
-    exit(0)
+@app.route('/success/', methods=['GET', 'POST'])
+def success():
+    if len(objs) == 0:
+        return redirect(request.url[-1])
 
-# Run
-weight.update_db()
-sp.Graph().plot_graph()
-st.Tweet().tweet(weight_msg, img_file)
-print("Success!")
+    if request.method == 'POST':
+        msg = request.form['msg']
+        weight = objs[0]
+        weight.update_db()
+        Graph().plot_graph()
+        Tweet().tweet(msg, '/tmp/weight.png')
+        return render_template('success.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)

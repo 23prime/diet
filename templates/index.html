@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p>体重を入力してください。</p>
+    <p>
+        <form action="/confirm/" method="post">
+            <input type="text" name="weight"></input>
+            <br>
+            <div class="button">
+                <button type="submit">Go!</button>
+            </div>
+        </form>
+    </p>
+{% endblock content %}
