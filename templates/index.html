@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>体重を入力してください。</p>
-    <p>
-        <form action="/confirm/" method="post">
-            <input type="text" name="weight"></input>
-            <br>
+    {% block content2 %}
+    {% endblock content2 %}
+        <form action="/confirm/" method="post"> 
+            <p>
+                体重
+                <input type="text" name="weight"></input>
+            </p>
+            <p>
+                Pass <input type="password" name="password"></input>
+            </p>
             <div class="button">
                 <button type="submit">Go!</button>
             </div>

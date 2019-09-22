@@ -1,23 +1,35 @@
 import os
+import requests
+import json
 from flask import *
 
 from src.plot import Graph
 from src.weight import Weight
 from src.tweet import Tweet
+from src.auth import Auth
 from app import app
 
 objs = []
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    if request.method == 'POST':
+        msg = 'パスワードが違うよ。'
+        return render_template('index2.html', msg=msg)
+    else:
+        return render_template('index.html')
 
 @app.route('/confirm/', methods=['GET', 'POST'])
 def confirm():
     if request.method == 'POST':
+        password = request.form['password']
+        if password != Auth.query.first().password:
+            return redirect(request.url[-1], code=307)
+
         t_weight = request.form['weight']
         weight = Weight(t_weight)
         objs.append(weight)
+
         try:
             weight_msg = weight.format_weight()
         except:
