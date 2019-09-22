@@ -41,6 +41,7 @@ footer {
 }
 
 input {
+    width: 70vw;
     font-size: 5vh;
 }
 
