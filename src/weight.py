@@ -9,7 +9,7 @@ def add_sign(f):
         return "+" + str(f)
 
 class Weight:
-    def __init__(self, csv_name):
+    def __init__(self):
         self.today = str(datetime.date.today().strftime("%m-%d"))
         self.t_weight = float()
         self.first = Weights.query.first()
