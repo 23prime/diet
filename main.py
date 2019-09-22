@@ -1,3 +1,4 @@
+import os
 from flask import *
 
 from src.plot import Graph
@@ -40,4 +41,5 @@ def success():
         return render_template('success.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(port=port)
