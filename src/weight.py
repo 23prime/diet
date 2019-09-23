@@ -31,3 +31,7 @@ class Weight:
     def update_db(self):
         db.session.add(Weights(date = self.today, weight = self.t_weight))
         db.session.commit()
+
+    def delete_rec(self):
+        db.session.add(Weights(date = self.today, weight = self.t_weight))
+        db.session.commit()

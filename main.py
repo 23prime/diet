@@ -7,7 +7,7 @@ from src.plot import Graph
 from src.weight import Weight
 from src.tweet import Tweet
 from src.auth import Auth
-from app import app
+from app import app, db
 
 objs = []
 
@@ -45,12 +45,25 @@ def success():
         return redirect(request.url[-1])
 
     if request.method == 'POST':
-        msg = request.form['msg']
         weight = objs[0]
-        weight.update_db()
-        Graph().plot_graph()
-        Tweet().tweet(msg, '/tmp/weight.png')
-        return render_template('success.html')
+        return redirect(url_for('error'))
+        try:
+            msg = request.form['msg']
+            weight.update_db()
+            Graph().plot_graph()
+            Tweet().tweet(msg, '/tmp/weight.png')
+            return render_template('success.html')
+        except:
+            weight.delete_rec()
+            return redirect(url_for('error'))
+
+@app.route('/error/', methods=['GET'])
+def error():
+    return render_template('error.html')
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
