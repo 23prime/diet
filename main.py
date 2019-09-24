@@ -46,16 +46,15 @@ def success():
 
     if request.method == 'POST':
         weight = objs[0]
-        return redirect(url_for('error'))
         try:
             msg = request.form['msg']
             weight.update_db()
             Graph().plot_graph()
             Tweet().tweet(msg, '/tmp/weight.png')
             return render_template('success.html')
-        except:
+        except Exception as e:
             weight.delete_rec()
-            return redirect(url_for('error'))
+            return render_template('error', error_msg=e)
 
 @app.route('/error/', methods=['GET'])
 def error():
