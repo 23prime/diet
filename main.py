@@ -7,7 +7,7 @@ from src.plot import Graph
 from src.weight import Weight
 from src.tweet import Tweet
 from src.auth import Auth
-from app import app, db
+from config import app, db
 
 objs = []
 
