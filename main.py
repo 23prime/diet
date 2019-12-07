@@ -11,6 +11,10 @@ from config import app, db
 
 objs = []
 
+@app.route('/', methods=['GET', 'POST'])
+def root():
+    return redirect('/diet/')
+
 @app.route('/diet/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
