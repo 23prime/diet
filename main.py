@@ -11,7 +11,7 @@ from config import app, db
 
 objs = []
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/diet/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         msg = 'パスワードが違うよ。'
@@ -19,12 +19,12 @@ def index():
     else:
         return render_template('index.html')
 
-@app.route('/confirm/', methods=['GET', 'POST'])
+@app.route('/diet/confirm/', methods=['GET', 'POST'])
 def confirm():
     if request.method == 'POST':
         password = request.form['password']
         if password != Auth.query.first().password:
-            return redirect(request.url[-1], code=307)
+            return redirect('/diet/', code=307)
 
         t_weight = request.form['weight']
         weight = Weight(t_weight)
@@ -37,12 +37,12 @@ def confirm():
         else:
             return render_template('confirm.html', weight_msg=weight_msg)
     else:
-        return redirect(request.url[-1])
+        return redirect('/diet/')
 
-@app.route('/success/', methods=['GET', 'POST'])
+@app.route('/diet/success/', methods=['GET', 'POST'])
 def success():
     if len(objs) == 0:
-        return redirect(request.url[-1])
+        return redirect('/diet/')
 
     if request.method == 'POST':
         weight = objs[0]
@@ -56,7 +56,7 @@ def success():
             weight.delete_rec()
             return render_template('error', error_msg=e)
 
-@app.route('/error/', methods=['GET'])
+@app.route('/diet/error/', methods=['GET'])
 def error():
     return render_template('error.html')
 
@@ -65,5 +65,4 @@ def not_found(error):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=5000)

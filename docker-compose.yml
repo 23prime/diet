@@ -3,4 +3,9 @@ version: '2.1'
 services:
   sos-page:
     image: ok-diet
+    container_name: ok-diet
     build: .
+    ports:
+      - "5000:5000"
+    command: ["pipenv", "run", "web"]
+    
