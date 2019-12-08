@@ -4,6 +4,10 @@ services:
   sos-page:
     image: ok-diet
     container_name: ok-diet
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      TZ: Asia/Tokyo
     build: .
     ports:
       - "5000:5000"
