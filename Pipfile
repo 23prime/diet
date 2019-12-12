@@ -12,6 +12,7 @@ flask-sqlalchemy = "*"
 flask-wtf = "*"
 flask-bootstrap = "*"
 psycopg2 = "*"
+pyopenssl = "*"
 
 [dev-packages]
 pylint = "*"
