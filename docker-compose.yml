@@ -11,4 +11,4 @@ services:
     build: .
     ports:
       - "5000:5000"
-    command: ["pipenv", "run", "web"]
+    command: ["poetry", "run", "web"]

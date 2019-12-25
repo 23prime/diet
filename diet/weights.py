@@ -1,4 +1,4 @@
-from config import db
+from diet.config import db
 
 class Weights(db.Model):
     __tablename__ = 'weights'

@@ -3,11 +3,11 @@ import requests
 import json
 from flask import *
 
-from src.plot import Graph
-from src.weight import Weight
-from src.tweet import Tweet
-from src.auth import Auth
-from config import app, db
+from diet.plot import Graph
+from diet.weight import Weight
+from diet.tweet import Tweet
+from diet.auth import Auth
+from diet.config import app, db
 
 objs = []
 
@@ -68,5 +68,5 @@ def error():
 def not_found(error):
     return render_template('404.html'), 404
 
-if __name__ == '__main__':
+def main():
     app.run(host='0.0.0.0', port=5000, ssl_context='adhoc')

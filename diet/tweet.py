@@ -1,6 +1,8 @@
 import twitter
 import os
 
+import diet.config
+
 class Tweet:
     def __init__(self):
         self.api = twitter.Api(

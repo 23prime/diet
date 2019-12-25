@@ -8,9 +8,9 @@ ENV PIPENV_VENV_IN_PROJECT 1
 
 WORKDIR /app
 
-RUN pip install pipenv
+RUN pip install poetry
 
-COPY Pipfile Pipfile.lock ./
-RUN pipenv install
+COPY pyproject.toml ./
+RUN poetry install -n
 
 COPY . ./
