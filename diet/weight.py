@@ -33,5 +33,7 @@ class Weight:
         db.session.commit()
 
     def delete_rec(self):
-        db.session.add(Weights(date = self.today, weight = self.t_weight))
+        rec = Weights.query().filter(
+            Weights.date == self.today, Weights.weight == self.t_weight)
+        db.session.delete(rec)
         db.session.commit()
