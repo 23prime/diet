@@ -18,7 +18,7 @@ class Weight:
 
     def format_weight(self):
         if self.last.date == self.today:
-            raise Exception
+            raise WeightsAlreadyExistException
 
         diff_f = round(self.t_weight - self.f_weight, 1)
         diff_y = round(self.t_weight - self.y_weight, 1)
@@ -29,11 +29,31 @@ class Weight:
             .format(self.today, self.t_weight, diff_y, diff_f))
 
     def update_db(self):
-        db.session.add(Weights(date = self.today, weight = self.t_weight))
-        db.session.commit()
+        try:
+            db.session.add(Weights(date = self.today, weight = self.t_weight))
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise WeightsDBException
+        finally:
+            db.session.close()
 
     def delete_rec(self):
-        rec = Weights.query().filter(
-            Weights.date == self.today, Weights.weight == self.t_weight)
-        db.session.delete(rec)
-        db.session.commit()
+        try:
+            rec = Weights.query().filter(
+                Weights.date == self.today, Weights.weight == self.t_weight)
+            db.session.delete(rec)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            raise WeightsDBException
+        finally:
+            db.session.close()
+
+
+class WeightsDBException(Exception):
+    pass
+
+
+class WeightsAlreadyExistException(Exception):
+    pass

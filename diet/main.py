@@ -4,7 +4,7 @@ import json
 from flask import *
 
 from diet.plot import Graph
-from diet.weight import Weight
+from diet.weight import *
 from diet.tweet import Tweet
 from diet.auth import Auth
 from diet.config import app, db
@@ -27,16 +27,16 @@ def index():
 def confirm():
     if request.method == 'POST':
         password = request.form['password']
+
         if password != Auth.query.first().password:
             return redirect('/diet/', code=307)
 
         t_weight = request.form['weight']
-        global weight
         weight = Weight(t_weight)
 
         try:
             weight_msg = weight.format_weight()
-        except:
+        except WeightsAlreadyExistException:
             return render_template('exist.html')
         else:
             return render_template('confirm.html', weight_msg=weight_msg)
@@ -52,12 +52,13 @@ def success():
 
     if request.method == 'POST':
         try:
-            msg = request.form['msg']
             weight.update_db()
+            msg = request.form['msg']
             Graph().plot_graph()
             Tweet().tweet(msg, '/tmp/weight.png')
-            weight = None
             return render_template('success.html')
+        except WeightsDBException as e:
+            return render_template('error', error_msg=e)
         except Exception as e:
             weight.delete_rec()
             return render_template('error', error_msg=e)
