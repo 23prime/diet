@@ -9,7 +9,7 @@ from diet.tweet import Tweet
 from diet.auth import Auth
 from diet.config import app, db
 
-objs = []
+weight = None
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
@@ -31,8 +31,8 @@ def confirm():
             return redirect('/diet/', code=307)
 
         t_weight = request.form['weight']
+        global weight
         weight = Weight(t_weight)
-        objs.append(weight)
 
         try:
             weight_msg = weight.format_weight()
@@ -45,16 +45,18 @@ def confirm():
 
 @app.route('/diet/success/', methods=['GET', 'POST'])
 def success():
-    if len(objs) == 0:
+    global weight
+
+    if weight is None:
         return redirect('/diet/')
 
     if request.method == 'POST':
-        weight = objs[0]
         try:
             msg = request.form['msg']
             weight.update_db()
             Graph().plot_graph()
             Tweet().tweet(msg, '/tmp/weight.png')
+            weight = None
             return render_template('success.html')
         except Exception as e:
             weight.delete_rec()
