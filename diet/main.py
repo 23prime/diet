@@ -25,6 +25,9 @@ def index():
 
 @app.route('/diet/confirm/', methods=['GET', 'POST'])
 def confirm():
+    global weight
+    weight = None
+
     if request.method == 'POST':
         password = request.form['password']
 
@@ -53,6 +56,7 @@ def success():
     if request.method == 'POST':
         try:
             weight.update_db()
+            weight = None
             msg = request.form['msg']
             Graph().plot_graph()
             Tweet().tweet(msg, '/tmp/weight.png')
