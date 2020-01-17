@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  sos-page:
+  ok-diet:
     image: ok-diet
     container_name: ok-diet
     volumes:
@@ -12,3 +12,4 @@ services:
     ports:
       - "5000:5000"
     command: ["poetry", "run", "web"]
+    restart: always
