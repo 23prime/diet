@@ -11,7 +11,7 @@ class Graph:
             columns=['date', 'weight']
         )
 
-    def plot_graph(self):
+    def plot_graph(self, graph_path):
         self.df.plot(x='date')
         mp.grid(which='major', color='black', linestyle=':')
-        m.pyplot.savefig('/tmp/weight.png')
+        m.pyplot.savefig(graph_path)

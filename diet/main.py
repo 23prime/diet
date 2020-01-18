@@ -10,6 +10,7 @@ from diet.auth import Auth
 from diet.config import app, db
 
 weight = None
+graph_path ='/app/diet/static/weight.png'
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
@@ -17,10 +18,13 @@ def root():
 
 @app.route('/diet/', methods=['GET', 'POST'])
 def index():
+    global graph_path
+
     if request.method == 'POST':
         msg = 'パスワードが違うよ。'
         return render_template('index2.html', msg=msg)
     else:
+        Graph().plot_graph(graph_path)
         return render_template('index.html')
 
 @app.route('/diet/confirm/', methods=['GET', 'POST'])
@@ -49,6 +53,7 @@ def confirm():
 @app.route('/diet/success/', methods=['GET', 'POST'])
 def success():
     global weight
+    global graph_path
 
     if weight is None:
         return redirect('/diet/')
@@ -58,8 +63,8 @@ def success():
             weight.update_db()
             weight = None
             msg = request.form['msg']
-            Graph().plot_graph()
-            Tweet().tweet(msg, '/tmp/weight.png')
+            Graph().plot_graph(graph_path)
+            Tweet().tweet(msg, graph_path)
             return render_template('success.html')
         except WeightsDBException as e:
             return render_template('error', error_msg=e)

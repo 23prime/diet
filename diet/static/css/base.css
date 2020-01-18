@@ -36,7 +36,7 @@ footer {
     text-align: center;
     background-color: lightgray;
     font-size: 2vh;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
 }
 
@@ -96,4 +96,8 @@ button:active {
 
 .content {
     padding: 5vh;
+}
+
+.graph {
+    text-align: center;
 }
