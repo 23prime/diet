@@ -10,7 +10,7 @@ from diet.auth import Auth
 from diet.config import app, db
 
 weight = None
-graph_path ='/app/diet/diet/static/weight.png'
+graph_path = '/app/diet/static/weight.png'
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
