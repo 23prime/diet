@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='diet/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
