@@ -1,5 +1,6 @@
 import datetime
-from diet.weights import Weights, db
+from diet.models.weights import Weights, db
+
 
 def add_sign(f):
     if f < 0:

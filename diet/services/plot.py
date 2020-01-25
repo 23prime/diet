@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib as m
 import matplotlib.pyplot as mp
-from diet.weights import Weights
+from diet.models.weights import Weights
 
 class Graph:
     def __init__(self):
