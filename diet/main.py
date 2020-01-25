@@ -12,10 +12,6 @@ from diet.config import app, db
 weight = None
 graph_path = '/app/diet/static/weight.png'
 
-@app.route('/', methods=['GET', 'POST'])
-def root():
-    return redirect('/diet/')
-
 @app.route('/diet/', methods=['GET', 'POST'])
 def index():
     global graph_path
