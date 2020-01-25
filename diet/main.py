@@ -10,10 +10,14 @@ from diet.auth import Auth
 from diet.config import app, db
 
 weight = None
-graph_path = '/app/diet/static/weight.png'
+graph_dir = 'static'
+graph_file = 'weight.png'
+graph_path = '/app/diet/' + graph_dir + '/' + graph_file
 
 @app.route('/diet/', methods=['GET', 'POST'])
 def index():
+    global graph_dir
+    global graph_file
     global graph_path
 
     if request.method == 'POST':
@@ -21,7 +25,9 @@ def index():
         return render_template('index2.html', msg=msg)
     else:
         Graph().plot_graph(graph_path)
-        return render_template('index.html')
+        return render_template(
+            'index.html',
+            img_path=url_for(graph_dir, filename=graph_file))
 
 @app.route('/diet/confirm/', methods=['GET', 'POST'])
 def confirm():
