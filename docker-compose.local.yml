@@ -1,0 +1,15 @@
+version: '2.1'
+
+services:
+  ok-diet-local:
+    image: ok-diet-local
+    container_name: ok-diet-local
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      TZ: Asia/Tokyo
+    build: .
+    ports:
+      - "5000:5000"
+    command: ["poetry", "run", "web"]
+    restart: always
