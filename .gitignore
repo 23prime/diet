@@ -6,3 +6,4 @@ weight.png
 .env
 cli.py
 *.egg-info/
+.venv

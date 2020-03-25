@@ -1,5 +1,7 @@
 import datetime
-from diet.models.weights import Weights, db
+
+from diet.config import db
+from diet.models.weights import Weights
 
 
 def add_sign(f):
@@ -8,7 +10,8 @@ def add_sign(f):
     else:
         return "+" + str(f)
 
-class Weight:
+
+class Weight(object):
     def __init__(self, t_weight):
         self.today = str(datetime.date.today().strftime("%m-%d"))
         self.t_weight = float(t_weight)
@@ -26,14 +29,14 @@ class Weight:
         diff_y = add_sign(diff_y)
         diff_f = add_sign(diff_f)
 
-        return ("{}\n{} kg\n前日比： {} kg\n初日比： {} kg\n\n#ok_diet"
-            .format(self.today, self.t_weight, diff_y, diff_f))
+        return ("{}\n{} kg\n前日比： {} kg\n初日比： {} kg\n\n#ok_diet".format(
+            self.today, self.t_weight, diff_y, diff_f))
 
     def update_db(self):
         try:
-            db.session.add(Weights(date = self.today, weight = self.t_weight))
+            db.session.add(Weights(date=self.today, weight=self.t_weight))
             db.session.commit()
-        except:
+        except Exception:
             db.session.rollback()
             raise WeightsDBException
         finally:
@@ -41,11 +44,11 @@ class Weight:
 
     def delete_rec(self):
         try:
-            rec = Weights.query().filter(
-                Weights.date == self.today, Weights.weight == self.t_weight)
+            rec = Weights.query().filter(Weights.date == self.today,
+                                         Weights.weight == self.t_weight)
             db.session.delete(rec)
             db.session.commit()
-        except:
+        except Exception:
             db.session.rollback()
             raise WeightsDBException
         finally:

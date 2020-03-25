@@ -6,3 +6,5 @@ docker-compose*
 README.md
 LICENSE
 .vscode
+setup.cfg
+poetry.toml

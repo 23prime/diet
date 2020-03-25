@@ -1,18 +1,22 @@
-import os
-import requests
-import json
-from flask import *
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import url_for
 
 from diet.config import app
-from diet.services.plot import Graph
-from diet.services.weight import *
-from diet.services.tweet import Tweet
 from diet.models.auth import Auth
+from diet.services.plot import Graph
+from diet.services.tweet import Tweet
+from diet.services.weight import Weight
+from diet.services.weight import WeightsAlreadyExistException
+from diet.services.weight import WeightsDBException
+
 
 weight = None
 graph_dir = 'static'
 graph_file = 'weight.png'
 graph_path = '/app/diet/' + graph_dir + '/' + graph_file
+
 
 @app.route('/diet/', methods=['GET', 'POST'])
 def index():
@@ -25,9 +29,10 @@ def index():
         return render_template('index2.html', msg=msg)
     else:
         Graph().plot_graph(graph_path)
-        return render_template(
-            'index.html',
-            img_path=url_for(graph_dir, filename=graph_file))
+        return render_template('index.html',
+                               img_path=url_for(graph_dir,
+                                                filename=graph_file))
+
 
 @app.route('/diet/confirm/', methods=['GET', 'POST'])
 def confirm():
@@ -52,6 +57,7 @@ def confirm():
     else:
         return redirect('/diet/')
 
+
 @app.route('/diet/success/', methods=['GET', 'POST'])
 def success():
     global weight
@@ -74,9 +80,11 @@ def success():
             weight.delete_rec()
             return render_template('error', error_msg=e)
 
+
 @app.route('/diet/error/', methods=['GET'])
 def error():
     return render_template('error.html')
+
 
 @app.errorhandler(404)
 def not_found(error):

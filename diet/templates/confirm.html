@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>以下の内容でツイートします。</p>
+<p>以下の内容でツイートします。</p>
 
-    <form action="/diet/success/" method="post">
-        <textarea class="confirm-text" name="msg">{{ weight_msg }}</textarea>
-        <br>
-        <div class="button">
-            <button type="submit">Tweet</button>
+<form action="/diet/success/" method="post">
+    <textarea class="confirm-text" name="msg">{{ weight_msg }}</textarea>
+    <br>
+    <div class="button">
+        <button type="submit">Tweet</button>
+    </div>
+
+    <a href="/diet/">
+        <div class="back">
+            戻る
         </div>
-
-        <a href="/diet/">
-            <div class="back">
-                戻る
-            </div>
-        </a>
-    </form>
+    </a>
+</form>
 {% endblock content %}

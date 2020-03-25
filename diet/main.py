@@ -1,5 +1,5 @@
-from diet.config import app
 import diet.view
+from diet.config import app
 
 
 def main():

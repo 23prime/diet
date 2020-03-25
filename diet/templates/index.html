@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% block content2 %}
-    {% endblock content2 %}
-        <div class="graph">
-            <img src="{{ img_path }}" width="100%">
-        </div>
+{% block content2 %}
+{% endblock content2 %}
+<div class="graph">
+    <img src="{{ img_path }}" width="100%">
+</div>
 
-        <form action="/diet/confirm/" method="post"> 
-            <p>
-                体重
-                <input type="number" step="0.1" name="weight" required></input>
-            </p>
-            <p>
-                Pass <input type="password" name="password" required></input>
-            </p>
-            <div class="button">
-                <button type="submit">Go!</button>
-            </div>
-        </form>
+<form action="/diet/confirm/" method="post">
+    <p>
+        体重
+        <input type="number" step="0.1" name="weight" required></input>
     </p>
+    <p>
+        Pass <input type="password" name="password" required></input>
+    </p>
+    <div class="button">
+        <button type="submit">Go!</button>
+    </div>
+</form>
+</p>
 {% endblock content %}
