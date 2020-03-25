@@ -15,3 +15,4 @@ class Graph(object):
         self.df.plot(x='date')
         mp.grid(which='major', color='black', linestyle=':')
         mp.savefig(graph_path)
+        mp.close()
